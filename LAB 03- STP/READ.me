@@ -1,0 +1,156 @@
+🧪 Lab 03 – Spanning Tree Protocol (STP) Root Manipulation & Port Protection
+📌 Overview
+This lab demonstrates IEEE 802.1D Spanning Tree Protocol (STP) behavior in a multi-switch topology with redundant links.
+The objectives were to:
+Identify the default root bridge
+Analyze STP port roles and states
+Manually manipulate root bridge election per VLAN
+Influence path selection using cost and port priority
+Configure PortFast and BPDU Guard
+Observe STP convergence and err-disable behavior
+Platform: Cisco Catalyst 2960 (Packet Tracer)
+Protocol: IEEE 802.1D STP
+VLANs Used: VLAN 1 and VLAN 2
+🗺 Topology
+
+
+
+
+
+
+4
+Four switches were connected with redundant Layer 2 links to intentionally create potential switching loops.
+1️⃣ Initial STP Topology Verification
+Command Used
+show spanning-tree
+🔎 Initial Root Bridge
+The initial root bridge was:
+SW2 (MAC: 0001.4301.4B81)
+Output confirmed:
+This bridge is the root
+SW2 had the lowest Bridge ID (priority + MAC address).
+🔁 Initial Port Roles (VLAN 1)
+SW1
+Interface	Role	State
+Fa0/1	Alternate	Blocking
+Fa0/2	Designated	Forwarding
+Fa0/3	Root	Forwarding
+SW2 (Root Bridge)
+Interface	Role	State
+Fa0/1	Designated	Forwarding
+Fa0/2	Designated	Forwarding
+Fa0/3	Designated	Forwarding
+Root bridges always have all ports as Designated Forwarding.
+SW3
+Interface	Role	State
+Fa0/1	Designated	Forwarding
+Fa0/2	Root	Forwarding
+Fa0/3	Designated	Forwarding
+SW4
+Interface	Role	State
+Fa0/1	Root	Forwarding
+Fa0/2	Alternate	Blocking
+2️⃣ Root Bridge Manipulation Per VLAN
+Configuration
+SW1
+spanning-tree vlan 1 root primary
+spanning-tree vlan 2 root secondary
+SW2
+spanning-tree vlan 2 root primary
+spanning-tree vlan 1 root secondary
+Resulting Root Distribution
+VLAN	Root Switch
+VLAN 1	SW1
+VLAN 2	SW2
+This configuration achieved per-VLAN load balancing.
+VLAN 1 Port Roles After Manipulation
+SW1 (Root)
+All interfaces became:
+Designated Forwarding
+SW2
+Interface	Role	State
+Fa0/1	Designated	Forwarding
+Fa0/2	Designated	Forwarding
+Fa0/3	Root	Forwarding
+SW3
+Interface	Role	State
+Fa0/1	Root	Forwarding
+Fa0/2	Alternate	Blocking
+Fa0/3	Designated	Forwarding
+STP recalculated and blocked Fa0/2 to prevent a loop.
+SW4 (Before Cost Change)
+Interface	Role	State
+Fa0/1	Alternate	Blocking
+Fa0/2	Root	Forwarding
+3️⃣ Path Cost Manipulation
+Configuration (SW4)
+interface f0/2
+spanning-tree vlan 1 cost 100
+Result
+SW4 selected a different root port.
+Updated behavior:
+Fa0/2 → Alternate Blocking
+Fa0/1 → Root Forwarding
+Explanation
+STP selects the root port based on lowest total path cost to the root bridge.
+By increasing the cost of Fa0/2, STP recalculated and selected Fa0/1 as the new root port.
+4️⃣ Port Priority Manipulation
+Configuration (SW1)
+interface f0/1
+spanning-tree vlan 1 port-priority 240
+Result
+SW3 did not select a different root port.
+Explanation
+Port priority only influences STP when path costs are equal.
+Since the root path cost remained unchanged, SW3 maintained its existing root port.
+STP decision process order:
+Lowest Root Bridge ID
+Lowest Path Cost
+Lowest Sender Bridge ID
+Lowest Port Priority
+Lowest Port Number
+Cost is evaluated before port priority.
+5️⃣ PortFast & BPDU Guard
+Configuration (SW3 & SW4 F0/3)
+interface f0/3
+spanning-tree portfast
+spanning-tree bpduguard enable
+Observed Behavior (SW3)
+When a BPDU was received:
+%SPANTREE-2-BLOCK_BPDUGUARD
+%PM-4-ERR_DISABLE
+The port entered an err-disabled state.
+Recovery
+shutdown
+no shutdown
+This demonstrates:
+PortFast is intended for host-facing ports.
+BPDU Guard protects against accidental switch connections.
+STP security features prevent Layer 2 loops.
+🧠 Key Technical Takeaways
+STP elects the root bridge using lowest Bridge ID.
+Root primary sets priority to 24576.
+Root secondary sets priority to 28672.
+Path cost directly affects root port selection.
+Port priority only affects tie-breaking.
+PortFast bypasses listening/learning states.
+BPDU Guard protects edge ports from rogue switches.
+STP dynamically recalculates topology when metrics change.
+🎯 CCNA Exam Alignment
+This lab directly reinforces:
+STP root bridge election
+Port roles (Root, Designated, Alternate)
+Port states (Forwarding, Blocking, Learning, Listening)
+Path cost manipulation
+Port priority manipulation
+PortFast
+BPDU Guard
+Err-disable recovery
+✅ Conclusion
+This lab demonstrated practical STP behavior including:
+Default root election
+Manual root manipulation
+Per-VLAN STP load balancing
+Cost and priority influence
+Edge-port protection
+All changes were verified using show spanning-tree.
