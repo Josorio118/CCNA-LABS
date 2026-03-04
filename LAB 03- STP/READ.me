@@ -1,156 +1,145 @@
-🧪 Lab 03 – Spanning Tree Protocol (STP) Root Manipulation & Port Protection
-📌 Overview
-This lab demonstrates IEEE 802.1D Spanning Tree Protocol (STP) behavior in a multi-switch topology with redundant links.
-The objectives were to:
-Identify the default root bridge
-Analyze STP port roles and states
-Manually manipulate root bridge election per VLAN
-Influence path selection using cost and port priority
-Configure PortFast and BPDU Guard
-Observe STP convergence and err-disable behavior
-Platform: Cisco Catalyst 2960 (Packet Tracer)
-Protocol: IEEE 802.1D STP
-VLANs Used: VLAN 1 and VLAN 2
-🗺 Topology
+# CCNA-LABS
 
+## Lab 03 – Spanning Tree Protocol (STP) Root Manipulation & Port Protection
 
+### Objective
+Demonstrate IEEE 802.1D STP behavior in a multi-switch topology with redundant links. Manually manipulate root bridge election, influence path selection, and configure edge port protection features.
 
+---
 
+### Topology
+- 4x Cisco Catalyst 2960 Switches (redundant Layer 2 links)
+- VLANs: VLAN 1 and VLAN 2
+- Protocol: IEEE 802.1D STP
+- Platform: Cisco Packet Tracer
 
+---
 
-4
-Four switches were connected with redundant Layer 2 links to intentionally create potential switching loops.
-1️⃣ Initial STP Topology Verification
-Command Used
-show spanning-tree
-🔎 Initial Root Bridge
-The initial root bridge was:
-SW2 (MAC: 0001.4301.4B81)
-Output confirmed:
-This bridge is the root
-SW2 had the lowest Bridge ID (priority + MAC address).
-🔁 Initial Port Roles (VLAN 1)
-SW1
-Interface	Role	State
-Fa0/1	Alternate	Blocking
-Fa0/2	Designated	Forwarding
-Fa0/3	Root	Forwarding
-SW2 (Root Bridge)
-Interface	Role	State
-Fa0/1	Designated	Forwarding
-Fa0/2	Designated	Forwarding
-Fa0/3	Designated	Forwarding
-Root bridges always have all ports as Designated Forwarding.
-SW3
-Interface	Role	State
-Fa0/1	Designated	Forwarding
-Fa0/2	Root	Forwarding
-Fa0/3	Designated	Forwarding
-SW4
-Interface	Role	State
-Fa0/1	Root	Forwarding
-Fa0/2	Alternate	Blocking
-2️⃣ Root Bridge Manipulation Per VLAN
-Configuration
-SW1
-spanning-tree vlan 1 root primary
-spanning-tree vlan 2 root secondary
-SW2
-spanning-tree vlan 2 root primary
-spanning-tree vlan 1 root secondary
-Resulting Root Distribution
-VLAN	Root Switch
-VLAN 1	SW1
-VLAN 2	SW2
-This configuration achieved per-VLAN load balancing.
-VLAN 1 Port Roles After Manipulation
-SW1 (Root)
-All interfaces became:
-Designated Forwarding
-SW2
-Interface	Role	State
-Fa0/1	Designated	Forwarding
-Fa0/2	Designated	Forwarding
-Fa0/3	Root	Forwarding
-SW3
-Interface	Role	State
-Fa0/1	Root	Forwarding
-Fa0/2	Alternate	Blocking
-Fa0/3	Designated	Forwarding
-STP recalculated and blocked Fa0/2 to prevent a loop.
-SW4 (Before Cost Change)
-Interface	Role	State
-Fa0/1	Alternate	Blocking
-Fa0/2	Root	Forwarding
-3️⃣ Path Cost Manipulation
-Configuration (SW4)
+### Step 1 – Initial STP Topology Verification
+
+**Command used:** `show spanning-tree`
+
+**Initial Root Bridge:** SW2 (MAC: 0001.4301.4B81) — lowest Bridge ID
+
+| Switch | Interface | Role | State |
+|--------|-----------|------|-------|
+| SW1 | Fa0/1 | Alternate | Blocking |
+| SW1 | Fa0/2 | Designated | Forwarding |
+| SW1 | Fa0/3 | Root | Forwarding |
+| SW2 (Root) | Fa0/1–3 | Designated | Forwarding |
+| SW3 | Fa0/1 | Designated | Forwarding |
+| SW3 | Fa0/2 | Root | Forwarding |
+| SW4 | Fa0/1 | Root | Forwarding |
+| SW4 | Fa0/2 | Alternate | Blocking |
+
+---
+
+### Step 2 – Root Bridge Manipulation Per VLAN
+
+**Configuration:**
+```
+SW1(config)# spanning-tree vlan 1 root primary
+SW1(config)# spanning-tree vlan 2 root secondary
+
+SW2(config)# spanning-tree vlan 2 root primary
+SW2(config)# spanning-tree vlan 1 root secondary
+```
+
+**Result:**
+
+| VLAN | Root Bridge |
+|------|-------------|
+| VLAN 1 | SW1 |
+| VLAN 2 | SW2 |
+
+- Per-VLAN load balancing achieved
+- STP recalculated — SW3 Fa0/2 became Alternate Blocking to prevent loop
+
+---
+
+### Step 3 – Path Cost Manipulation
+
+**Configuration (SW4):**
+```
 interface f0/2
-spanning-tree vlan 1 cost 100
-Result
-SW4 selected a different root port.
-Updated behavior:
-Fa0/2 → Alternate Blocking
-Fa0/1 → Root Forwarding
-Explanation
-STP selects the root port based on lowest total path cost to the root bridge.
-By increasing the cost of Fa0/2, STP recalculated and selected Fa0/1 as the new root port.
-4️⃣ Port Priority Manipulation
-Configuration (SW1)
+ spanning-tree vlan 1 cost 100
+```
+
+**Result:** SW4 selected Fa0/1 as root port instead of Fa0/2
+
+**Why:** STP selects root port based on lowest total path cost. Increasing Fa0/2 cost forced STP to recalculate and prefer Fa0/1.
+
+---
+
+### Step 4 – Port Priority Manipulation
+
+**Configuration (SW1):**
+```
 interface f0/1
-spanning-tree vlan 1 port-priority 240
-Result
-SW3 did not select a different root port.
-Explanation
-Port priority only influences STP when path costs are equal.
-Since the root path cost remained unchanged, SW3 maintained its existing root port.
-STP decision process order:
-Lowest Root Bridge ID
-Lowest Path Cost
-Lowest Sender Bridge ID
-Lowest Port Priority
-Lowest Port Number
-Cost is evaluated before port priority.
-5️⃣ PortFast & BPDU Guard
-Configuration (SW3 & SW4 F0/3)
+ spanning-tree vlan 1 port-priority 240
+```
+
+**Result:** SW3 did not change its root port
+
+**Why:** Port priority is only a tie-breaker when path costs are equal. Since cost was unchanged, priority had no effect.
+
+> STP decision order: Root Bridge ID → Path Cost → Sender Bridge ID → Port Priority → Port Number
+
+---
+
+### Step 5 – PortFast & BPDU Guard
+
+**Configuration (SW3 & SW4 Fa0/3):**
+```
 interface f0/3
-spanning-tree portfast
-spanning-tree bpduguard enable
-Observed Behavior (SW3)
-When a BPDU was received:
-%SPANTREE-2-BLOCK_BPDUGUARD
-%PM-4-ERR_DISABLE
-The port entered an err-disabled state.
-Recovery
-shutdown
-no shutdown
-This demonstrates:
-PortFast is intended for host-facing ports.
-BPDU Guard protects against accidental switch connections.
-STP security features prevent Layer 2 loops.
-🧠 Key Technical Takeaways
-STP elects the root bridge using lowest Bridge ID.
-Root primary sets priority to 24576.
-Root secondary sets priority to 28672.
-Path cost directly affects root port selection.
-Port priority only affects tie-breaking.
-PortFast bypasses listening/learning states.
-BPDU Guard protects edge ports from rogue switches.
-STP dynamically recalculates topology when metrics change.
-🎯 CCNA Exam Alignment
-This lab directly reinforces:
-STP root bridge election
-Port roles (Root, Designated, Alternate)
-Port states (Forwarding, Blocking, Learning, Listening)
-Path cost manipulation
-Port priority manipulation
-PortFast
-BPDU Guard
-Err-disable recovery
-✅ Conclusion
-This lab demonstrated practical STP behavior including:
-Default root election
-Manual root manipulation
-Per-VLAN STP load balancing
-Cost and priority influence
-Edge-port protection
-All changes were verified using show spanning-tree.
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+```
+
+**Observed behavior:** When a BPDU was received, the port entered **err-disabled** state
+
+**Recovery:**
+```
+interface f0/3
+ shutdown
+ no shutdown
+```
+
+---
+
+### Verification Commands
+
+| Command | Purpose |
+|---------|---------|
+| `show spanning-tree` | View port roles, states, and root bridge |
+| `show spanning-tree vlan 1` | Per-VLAN STP detail |
+| `show errdisable recovery` | Check err-disable status and timers |
+
+---
+
+### Key Observations
+- `root primary` sets priority to 24576
+- `root secondary` sets priority to 28672
+- Path cost directly affects root port selection
+- Port priority only matters when costs are tied
+- BPDU Guard protects PortFast ports from rogue switch connections
+- STP dynamically recalculates when metrics change
+
+---
+
+### Skills Demonstrated
+- STP root bridge election and manual manipulation
+- Per-VLAN STP load balancing
+- Path cost and port priority influence
+- PortFast and BPDU Guard configuration
+- Err-disable observation and recovery
+
+---
+
+### CCNA Exam Alignment
+- **2.5** – Describe the need for and basic operations of Rapid PVST+ spanning tree protocol
+
+---
+
+### Files
+- `Configuring_Spanning_Tree.pkt`
