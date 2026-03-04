@@ -1,61 +1,104 @@
 # CCNA-LABS
 
-This repository contains hands-on Cisco Packet Tracer labs completed as part of my preparation for the **Cisco CCNA (200-301)** certification.
+> Hands-on Cisco Packet Tracer labs built alongside active study for the **Cisco CCNA 200-301** certification.
 
-The goal of this project is to reinforce core networking concepts through **practical lab work**, verification, and documentation — not just configuration. Each lab is aligned with specific CCNA exam objectives and focuses on understanding *why* the network behaves the way it does.
-
----
-
-##  Lab Structure
-
-Each lab is organized into its own folder and includes:
-- A **Packet Tracer (.pkt)** file
-- A dedicated **README.md** documenting:
-  - Lab objectives
-  - Topology overview
-  - Key observations
-  - Relevant CLI verification
-  - CCNA exam alignment
-
-This structure allows each lab to stand on its own while keeping the repository clean and easy to navigate.
+This repository documents my practical lab work as I progress through the CCNA curriculum. Each lab is paired with study notes, CLI verification, and a write-up explaining not just *what* was configured — but *why* the network behaves the way it does.
 
 ---
 
-##  Completed Labs
+## About This Repository
 
-### Lab 01 – Inter-VLAN Routing (Router-on-a-Stick)
-- VLAN segmentation on a Layer 2 switch
-- 802.1Q trunking between switch and router
-- Subinterfaces for inter-VLAN communication
-- End-to-end connectivity verification
+I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hands-on labs in Cisco Packet Tracer to reinforce every topic. Labs are organized by topic block and follow a consistent structure:
 
-📁 `Lab 01 Inter VLAN Routing/`
-
----
-
-### Lab 02 – Spanning Tree Protocol (STP) Analysis
-- Root bridge election using bridge ID
-- Root, designated, and blocking port identification
-- STP tie-breaker logic (cost, bridge ID, port ID)
-- Verification using `show spanning-tree` commands
-
-📁 `Lab02-STP_ANALYSIS/`
+- **Objective** — what the lab is trying to prove or demonstrate
+- **Topology** — devices and connections used
+- **Configuration** — commands applied with context
+- **Verification** — show commands and what to look for
+- **Key Observations** — what actually happened and why
+- **Troubleshooting** — real errors encountered and how they were fixed
+- **CCNA Exam Alignment** — which exam objective the lab supports
 
 ---
 
-##  Certification Alignment
+## Lab Progress
 
-These labs align with **CCNA 200-301** exam domains, including:
-- Network Fundamentals
-- Network Access (VLANs, STP)
-- IP Connectivity
-- Infrastructure services (verification & troubleshooting)
+### ✅ Layer 2 Foundation
 
-Spanning Tree configuration is not required for CCNA, but **understanding and interpretation** of STP behavior is essential and emphasized throughout this project.
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 01 | Inter-VLAN Routing (Router-on-a-Stick) | 802.1Q, Subinterfaces | ✅ Complete |
+| Lab 02 | STP Analysis | IEEE 802.1D PVST | ✅ Complete |
+| Lab 03 | STP Root Manipulation & Port Protection | PVST+, PortFast, BPDU Guard | ✅ Complete |
+| Lab 04 | Rapid STP Analysis | RSTP / Rapid PVST+ | ✅ Complete |
+| Lab 05 | EtherChannel (Layer 2 & Layer 3) | LACP, PAgP, Static | ✅ Complete |
+
+### 🔲 Layer 3 Core *(Coming Soon)*
+
+| Lab | Topic | Status |
+|-----|-------|--------|
+| Lab 06 | IPv4 Addressing & Subnetting | 🔲 Planned |
+| Lab 07 | Static Routing | 🔲 Planned |
+| Lab 08 | OSPFv2 (Single Area) | 🔲 Planned |
+
+### 🔲 Services & Security *(Coming Soon)*
+
+| Lab | Topic | Status |
+|-----|-------|--------|
+| Lab 09 | DHCP & DNS | 🔲 Planned |
+| Lab 10 | NAT / PAT | 🔲 Planned |
+| Lab 11 | Access Control Lists (ACLs) | 🔲 Planned |
+| Lab 12 | Wireless Fundamentals | 🔲 Planned |
 
 ---
 
-##  Tools Used
-- Cisco Packet Tracer
-- Cisco IOS CLI
-- Jeremy’s IT Lab (CCNA 200-301 course)
+## Tools & Resources
+
+| Tool | Purpose |
+|------|---------|
+| Cisco Packet Tracer | Network simulation and lab environment |
+| Cisco IOS / IOS-XE CLI | Configuration and verification |
+| Jeremy's IT Lab | Primary CCNA study resource |
+| Anki Flashcards | Daily review of key concepts |
+
+---
+
+## Certification Target
+
+**Cisco Certified Network Associate (CCNA) 200-301**
+
+Exam domains covered by this lab series:
+
+- **1.0 Network Fundamentals** — OSI model, Ethernet, switching
+- **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel
+- **3.0 IP Connectivity** — Routing tables, static routes, OSPF
+- **4.0 IP Services** — DHCP, NAT, NTP
+- **5.0 Security Fundamentals** — ACLs, port security
+- **6.0 Automation & Programmability** — Coming later
+
+---
+
+## Repository Structure
+
+```
+CCNA-LABS/
+├── Lab 01 Inter VLAN Routing/
+│   ├── README.md
+│   └── Inter-VLAN-Routing-Router-on-a-Stick.pkt
+├── Lab02-STP_ANALYSIS/
+│   ├── README.md
+│   └── Analyzing_STP_Lab.pkt
+├── LAB 03- STP/
+│   ├── README.md
+│   └── Configuring_Spanning_Tree.pkt
+├── Lab 04- Rapid STP/
+│   ├── README.md
+│   └── Rapid_STP_Lab.pkt
+├── LAB 05-EtherChannel/
+│   ├── README.md
+│   └── LAB05-EtherChannel.pkt
+└── README.md  ← you are here
+```
+
+---
+
+*Updated as new labs are completed. Each lab README contains full configuration details, CLI output, and exam alignment.*
