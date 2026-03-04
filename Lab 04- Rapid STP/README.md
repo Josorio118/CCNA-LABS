@@ -1,107 +1,136 @@
-LAB 04 – Rapid Spanning Tree Protocol (RSTP) Analysis
-Objective
-This lab focuses on analyzing Rapid Spanning Tree Protocol (RSTP) behavior in a multi-switch topology.
-The goals were to:
-Identify the root bridge
-Determine port roles and states without using the CLI
-Verify results using show spanning-tree
-Configure appropriate RSTP link types
-Configure edge ports using PortFast
-Topology Overview
-4x Cisco 2960 switches
-1x hub (shared collision domain)
-Multiple PCs connected to access ports
-Single VLAN (VLAN 1)
-All switches priority: 32769 (32768 + VLAN 1)
-Because all switch priorities were equal, root election was determined by the lowest MAC address.
-Step 1 – Root Bridge Identification
-Command used:
-show spanning-tree
-Root Bridge: SW1
-Root ID Priority 32769
-Address 0005.5E4E.714B
-This bridge is the root
-Important Observation
-On SW1:
+# CCNA-LABS
+
+## Lab 04 – Rapid Spanning Tree Protocol (RSTP) Analysis
+
+### Objective
+Analyze Rapid Spanning Tree Protocol behavior in a multi-switch topology. Identify the root bridge, determine port roles and states without the CLI first, then verify results and configure appropriate RSTP link types and edge ports.
+
+---
+
+### Topology
+- 4x Cisco 2960 Switches
+- 1x Hub (shared collision domain)
+- Multiple PCs on access ports
+- Single VLAN (VLAN 1)
+- All switch priorities: 32769 (32768 + VLAN 1)
+- Root election determined by lowest MAC address (all priorities equal)
+
+---
+
+### Step 1 – Root Bridge Identification
+
+**Command used:** `show spanning-tree`
+
+**Root Bridge: SW1**
+```
+Root ID  Priority  32769
+         Address   0005.5E4E.714B
+         This bridge is the root
+```
+
+**Important observation — Backup Port:**
+SW1 had two interfaces connected to the same hub (same collision domain).
+Only one can be designated — the other became a **Backup port**.
+
+```
 Fa0/3  Back  BLK  Shr
-This is a Backup port in RSTP.
-In classic STP, this would have been a non-designated port.
-Because SW1 has two interfaces connected to the same hub (same collision domain), only one interface can be designated. The other becomes a backup port.
-Key refinement:
-The root bridge has one designated port per collision domain.
-Step 2 – Port Role and State Analysis
-SW2
-Fa0/1 → Root Port
-Fa0/2 → Designated
-Fa0/23–24 → Designated (PCs)
-Gi0/1 → Alternate (Discarding)
-Verified:
-Gi0/1  Altn BLK  P2p
-SW3
-Fa0/2 → Root Port
-Fa0/1 → Designated
-Gi0/1 → Designated
-Fa0/24 → Designated (PC)
-Verified:
-Fa0/2 Root FWD Shr
-SW4
-Fa0/1 → Root Port
-Fa0/2 → Alternate
-Fa0/24 → Designated (PC)
-Verified:
-Fa0/2 Altn BLK P2p
-Step 3 – RSTP Link Type Configuration
-RSTP Link Types
-Point-to-Point → Full-duplex switch-to-switch links
-Shared → Hub connections (half-duplex)
-Edge → PortFast-enabled access ports
-SW4 Configuration
-conf t
+```
+
+> Key refinement: The root bridge has one designated port per collision domain — not one per interface.
+
+---
+
+### Step 2 – Port Role and State Analysis
+
+| Switch | Interface | Role | State | Type |
+|--------|-----------|------|-------|------|
+| SW2 | Fa0/1 | Root | Forwarding | — |
+| SW2 | Fa0/2 | Designated | Forwarding | — |
+| SW2 | Gi0/1 | Alternate | Blocking | P2p |
+| SW3 | Fa0/2 | Root | Forwarding | Shr |
+| SW3 | Fa0/1 | Designated | Forwarding | — |
+| SW3 | Gi0/1 | Designated | Forwarding | — |
+| SW4 | Fa0/1 | Root | Forwarding | — |
+| SW4 | Fa0/2 | Alternate | Blocking | P2p |
+
+---
+
+### Step 3 – RSTP Link Type Configuration
+
+**RSTP Link Types:**
+
+| Type | When Used |
+|------|-----------|
+| Point-to-Point | Full-duplex switch-to-switch links |
+| Shared | Hub connections (half-duplex) |
+| Edge | PortFast-enabled access ports |
+
+**SW4:**
+```
 interface range f0/1 - 2
-spanning-tree link-type point-to-point
+ spanning-tree link-type point-to-point
 
 interface f0/24
-spanning-tree portfast
-SW3 Configuration
-conf t
+ spanning-tree portfast
+```
+
+**SW3:**
+```
 interface f0/24
-spanning-tree portfast
-Fa0/2 was automatically detected as shared due to hub connection.
-SW2 Configuration
-conf t
+ spanning-tree portfast
+```
+> Fa0/2 auto-detected as Shared due to hub connection
+
+**SW2:**
+```
 interface range f0/23 - 24
-spanning-tree portfast
-SW1 Configuration
-conf t
+ spanning-tree portfast
+```
+
+**SW1:**
+```
 interface f0/24
-spanning-tree portfast
-Important detail:
-SW1 Fa0/24 is:
-Connected to a hub
-Therefore Shared
-But also an Edge port (PortFast enabled)
-In Packet Tracer, only Shr appears in the Type column.
-On a real Cisco switch, it would display both:
-Edge Shr
-This demonstrates:
-P2p / Shr = duplex-based link type
-Edge = PortFast behavior
-A port can be both Shared and Edge
-Key RSTP Concepts Reinforced
-RSTP uses protocol version 2
-All switches generate BPDUs
-Port states: Discarding, Learning, Forwarding
-Non-designated role split into Alternate and Backup
-PortFast, UplinkFast, and BackboneFast behavior built into RSTP
-Verification Commands Used
-show spanning-tree
-spanning-tree mode rapid-pvst
-spanning-tree link-type point-to-point
-spanning-tree portfast
-Final Outcome
-Correct root bridge identified
-Root, designated, alternate, and backup ports mapped accurately
-RSTP link types configured where appropriate
-Edge ports configured using PortFast
-All configurations verified via CLI
-This lab strengthened practical understanding of RSTP behavior and its improvements over classic STP.
+ spanning-tree portfast
+```
+
+> SW1 Fa0/24 is connected to a hub (Shared) but also has PortFast enabled (Edge).
+> In Packet Tracer only `Shr` appears. On real hardware it would display `Edge Shr`.
+> A port can be both Shared and Edge simultaneously.
+
+---
+
+### Verification Commands
+
+| Command | Purpose |
+|---------|---------|
+| `show spanning-tree` | Verify root bridge, port roles, and link types |
+| `spanning-tree mode rapid-pvst` | Confirm RSTP mode |
+| `spanning-tree link-type point-to-point` | Set P2P link type |
+| `spanning-tree portfast` | Configure edge port |
+
+---
+
+### Key Observations
+- RSTP uses protocol version 2 — all switches originate their own BPDUs
+- Non-designated role split into Alternate (backs up root port) and Backup (backs up designated port on same switch)
+- Port states simplified to: Discarding, Learning, Forwarding
+- PortFast, UplinkFast, and BackboneFast behavior built into RSTP by default
+
+---
+
+### Skills Demonstrated
+- RSTP root bridge identification
+- Alternate and Backup port role distinction
+- RSTP link type configuration (P2P, Shared, Edge)
+- PortFast configuration on access ports
+- CLI verification of RSTP behavior
+
+---
+
+### CCNA Exam Alignment
+- **2.5** – Describe the need for and basic operations of Rapid PVST+ spanning tree protocol
+
+---
+
+### Files
+- `Rapid_STP_Lab.pkt`
