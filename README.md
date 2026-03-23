@@ -32,12 +32,17 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 | Lab 04 | Rapid STP Analysis | RSTP / Rapid PVST+ | ✅ Complete |
 | Lab 05 | EtherChannel (Layer 2 & Layer 3) | LACP, PAgP, Static | ✅ Complete |
 
+### ✅ Layer 3 Core
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 06 | Static Routing | IPv4, Next-Hop, Default Route | ✅ Complete |
+
 ### 🔲 Layer 3 Core *(Coming Soon)*
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 06 | IPv4 Addressing & Subnetting | 🔲 Planned |
-| Lab 07 | Static Routing | 🔲 Planned |
+| Lab 07 | IPv4 Addressing & Subnetting | 🔲 Planned |
 | Lab 08 | OSPFv2 (Single Area) | 🔲 Planned |
 
 ### 🔲 Services & Security *(Coming Soon)*
@@ -96,6 +101,9 @@ CCNA-LABS/
 ├── LAB 05-EtherChannel/
 │   ├── README.md
 │   └── LAB05-EtherChannel.pkt
+├── Lab06-Static-Routing/
+│   ├── README.md
+│   └── Lab06-Static-Routing.pkt
 └── README.md  ← you are here
 ```
 
