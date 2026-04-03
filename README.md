@@ -37,22 +37,30 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 | Lab | Topic | Protocol / Method | Status |
 |-----|-------|-------------------|--------|
 | Lab 06 | Static Routing | IPv4, Next-Hop, Default Route | ✅ Complete |
+| Lab 07 | Subnetting (VLSM) | Variable-Length Subnet Masks | ✅ Complete |
 
-### 🔲 Layer 3 Core *(Coming Soon)*
+### ✅ VLANs & Inter-VLAN Routing
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 08 | VLANs Part 1 — Access Ports | 802.1Q, Access Ports | ✅ Complete |
+| Lab 09 | VLANs Part 2 — Trunking & ROAS | 802.1Q Trunking, Router-on-a-Stick | ✅ Complete |
+| Lab 10 | VLANs Part 3 — Multilayer Switch & SVIs | SVIs, Layer 3 Switching | ✅ Complete |
+
+### 🔲 Dynamic Routing *(Coming Soon)*
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 07 | IPv4 Addressing & Subnetting | 🔲 Planned |
-| Lab 08 | OSPFv2 (Single Area) | 🔲 Planned |
+| Lab 11 | OSPFv2 (Single Area) | 🔲 Planned |
 
 ### 🔲 Services & Security *(Coming Soon)*
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 09 | DHCP & DNS | 🔲 Planned |
-| Lab 10 | NAT / PAT | 🔲 Planned |
-| Lab 11 | Access Control Lists (ACLs) | 🔲 Planned |
-| Lab 12 | Wireless Fundamentals | 🔲 Planned |
+| Lab 12 | DHCP & DNS | 🔲 Planned |
+| Lab 13 | NAT / PAT | 🔲 Planned |
+| Lab 14 | Access Control Lists (ACLs) | 🔲 Planned |
+| Lab 15 | Wireless Fundamentals | 🔲 Planned |
 
 ---
 
@@ -73,8 +81,8 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 
 Exam domains covered by this lab series:
 
-- **1.0 Network Fundamentals** — OSI model, Ethernet, switching
-- **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel
+- **1.0 Network Fundamentals** — OSI model, Ethernet, switching, subnetting
+- **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel, SVIs
 - **3.0 IP Connectivity** — Routing tables, static routes, OSPF
 - **4.0 IP Services** — DHCP, NAT, NTP
 - **5.0 Security Fundamentals** — ACLs, port security
@@ -101,9 +109,21 @@ CCNA-LABS/
 ├── LAB 05-EtherChannel/
 │   ├── README.md
 │   └── LAB05-EtherChannel.pkt
-├── Lab06-Static-Routing/
+├── LAB 06-Static Routing/
 │   ├── README.md
 │   └── Lab06-Static-Routing.pkt
+├── LAB 07- VLSM/
+│   ├── README.md
+│   └── Lab07-VLSM.pkt
+├── LAB 08-VLANs PT1/
+│   ├── README.md
+│   └── Day16_VLANs_Part1.pkt
+├── Lab 09-VLANs PT2/
+│   ├── README.md
+│   └── Lab09- VLANs Pt2.pkt
+├── LAB 10-VLANs PT3/
+│   ├── README.md
+│   └── Lab18- VLANs Pt3.pkt
 └── README.md  ← you are here
 ```
 
