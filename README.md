@@ -50,16 +50,17 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 |-----|-------|-------------------|--------|
 | Lab 13 | EIGRP Configuration & Unequal-Cost Load-Balancing | EIGRP AS100, Variance, Feasible Successor | ✅ Complete |
 | Lab 14 | OSPFv2 Single Area (Part 1) | OSPFv2, Area 0, ASBR, Default Route | ✅ Complete |
+| Lab 15 | OSPFv2 Single Area (Part 2) | ip ospf interface command, Reference Bandwidth, Cost | ✅ Complete |
 
 ### 🔲 Coming Next
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 15 | OSPFv2 Part 2 | 🔲 Planned |
-| Lab 16 | DHCP & DNS | 🔲 Planned |
-| Lab 17 | NAT / PAT | 🔲 Planned |
-| Lab 18 | Access Control Lists (ACLs) | 🔲 Planned |
-| Lab 19 | Wireless Fundamentals | 🔲 Planned |
+| Lab 16 | OSPFv2 Part 3 — DR/BDR | 🔲 Planned |
+| Lab 17 | DHCP & DNS | 🔲 Planned |
+| Lab 18 | NAT / PAT | 🔲 Planned |
+| Lab 19 | Access Control Lists (ACLs) | 🔲 Planned |
+| Lab 20 | Wireless Fundamentals | 🔲 Planned |
 
 ---
 
@@ -135,6 +136,9 @@ CCNA-LABS/
 ├── LAB 14- OSPF PT1/
 │   ├── README.md
 │   └── Lab14-OSPF_Part1.pkt
+├── LAB 15- OSPF PT2/
+│   ├── README.md
+│   └── Lab15-OSPF_Part2.pkt
 └── README.md  ← you are here
 ```
 
