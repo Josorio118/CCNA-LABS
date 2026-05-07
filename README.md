@@ -51,16 +51,29 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 | Lab 13 | EIGRP Configuration & Unequal-Cost Load-Balancing | EIGRP AS100, Variance, Feasible Successor | ✅ Complete |
 | Lab 14 | OSPFv2 Single Area (Part 1) | OSPFv2, Area 0, ASBR, Default Route | ✅ Complete |
 | Lab 15 | OSPFv2 Single Area (Part 2) | ip ospf interface command, Reference Bandwidth, Cost | ✅ Complete |
+| Lab 16 | OSPFv2 Part 3 — DR/BDR, Network Types & Troubleshooting | Broadcast/P2P network types, Neighbor requirements, LSA types | ✅ Complete |
+
+### ✅ Capstone
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 17 | Integrated Network Design | VLANs, EtherChannel, VTP, STP, OSPFv2, Floating Static, Serial WAN | ✅ Complete |
+
+### ✅ IP Services
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 18 | HSRP Configuration | HSRP v2, Active/Standby, Preemption, Virtual IP/MAC | ✅ Complete |
 
 ### 🔲 Coming Next
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 16 | OSPFv2 Part 3 — DR/BDR | 🔲 Planned |
-| Lab 17 | DHCP & DNS | 🔲 Planned |
-| Lab 18 | NAT / PAT | 🔲 Planned |
-| Lab 19 | Access Control Lists (ACLs) | 🔲 Planned |
-| Lab 20 | Wireless Fundamentals | 🔲 Planned |
+| Lab 19 | TCP & UDP | 🔲 Planned |
+| Lab 20 | IPv6 | 🔲 Planned |
+| Lab 21 | DHCP & DNS | 🔲 Planned |
+| Lab 22 | NAT / PAT | 🔲 Planned |
+| Lab 23 | Access Control Lists (ACLs) | 🔲 Planned |
 
 ---
 
@@ -83,7 +96,7 @@ Exam domains covered by this lab series:
 
 - **1.0 Network Fundamentals** — OSI model, Ethernet, switching, subnetting
 - **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel, SVIs, DTP, VTP
-- **3.0 IP Connectivity** — Routing tables, static routes, floating static routes, EIGRP, OSPFv2
+- **3.0 IP Connectivity** — Routing tables, static routes, floating static routes, EIGRP, OSPFv2, FHRP
 - **4.0 IP Services** — DHCP, NAT, NTP *(coming)*
 - **5.0 Security Fundamentals** — ACLs, port security *(coming)*
 - **6.0 Automation & Programmability** — *(coming)*
@@ -95,50 +108,23 @@ Exam domains covered by this lab series:
 ```
 CCNA-LABS/
 ├── LAB 01- Inter VLAN Routing/
-│   ├── README.md
-│   └── Lab01-Inter_VLAN_Routing.pkt
 ├── LAB 02-STP_ANALYSIS/
-│   ├── README.md
-│   └── Lab02-STP_Analysis.pkt
 ├── LAB 03- STP/
-│   ├── README.md
-│   └── Lab03-STP_Root_Manipulation.pkt
 ├── LAB 04- Rapid STP/
-│   ├── README.md
-│   └── Lab04-Rapid_STP.pkt
 ├── LAB 05-EtherChannel/
-│   ├── README.md
-│   └── Lab05-EtherChannel.pkt
 ├── LAB 06-Static Routing/
-│   ├── README.md
-│   └── Lab06-Static_Routing.pkt
 ├── LAB 07- VLSM/
-│   ├── README.md
-│   └── Lab07-VLSM.pkt
 ├── LAB 08-VLANs PT1/
-│   ├── README.md
-│   └── Lab08-VLANs_PT1.pkt
 ├── LAB 09-VLANs PT2/
-│   ├── README.md
-│   └── Lab09-VLANs_PT2.pkt
 ├── LAB 10-VLANs PT3/
-│   ├── README.md
-│   └── Lab10-VLANs_PT3.pkt
 ├── LAB 11- DTP+ VTP/
-│   ├── README.md
-│   └── Lab11-DTP_VTP.pkt
 ├── LAB 12- Dynamic Routing/
-│   ├── README.md
-│   └── Lab12-Floating_Static_Routes.pkt
 ├── LAB 13-EIGRP Config/
-│   ├── README.md
-│   └── Lab13-EIGRP_Configuration.pkt
 ├── LAB 14- OSPF PT1/
-│   ├── README.md
-│   └── Lab14-OSPF_Part1.pkt
 ├── LAB 15- OSPF PT2/
-│   ├── README.md
-│   └── Lab15-OSPF_Part2.pkt
+├── LAB 16- OSPF PT3/
+├── LAB 17- Integrated Network Design/
+├── LAB 18- HSRP Configuration/
 └── README.md  ← you are here
 ```
 
