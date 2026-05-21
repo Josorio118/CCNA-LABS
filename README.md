@@ -59,21 +59,36 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 |-----|-------|-------------------|--------|
 | Lab 17 | Integrated Network Design | VLANs, EtherChannel, VTP, STP, OSPFv2, Floating Static, Serial WAN | ✅ Complete |
 
-### ✅ IP Services
+### ✅ IP Services & First Hop Redundancy
 
 | Lab | Topic | Protocol / Method | Status |
 |-----|-------|-------------------|--------|
 | Lab 18 | HSRP Configuration | HSRP v2, Active/Standby, Preemption, Virtual IP/MAC | ✅ Complete |
 
+### ✅ IPv6
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 19 | IPv6 Configuration Part 1 — Dual-Stack | Static IPv6, Dual-Stack, ipv6 unicast-routing | ✅ Complete |
+| Lab 20 | IPv6 Address Types & EUI-64 (Part 2) | EUI-64, ipv6 enable, Link-Local | ✅ Complete |
+| Lab 21 | IPv6 Static Routes (Part 3) | SLAAC, NDP, Fully Specified Static, Floating Static | ✅ Complete |
+
+### ✅ Security — Access Control Lists
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 22 | Standard ACLs (Numbered & Named) | Standard ACLs, Wildcard Masks, OSPF | ✅ Complete |
+| Lab 23 | Extended ACLs | TCP/UDP/IP matching, Port numbers, ACL editing | ✅ Complete |
+
 ### 🔲 Coming Next
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 19 | TCP & UDP | 🔲 Planned |
-| Lab 20 | IPv6 | 🔲 Planned |
-| Lab 21 | DHCP & DNS | 🔲 Planned |
-| Lab 22 | NAT / PAT | 🔲 Planned |
-| Lab 23 | Access Control Lists (ACLs) | 🔲 Planned |
+| Lab 24 | DHCP | 🔲 Planned |
+| Lab 25 | NAT / PAT | 🔲 Planned |
+| Lab 26 | Wireless Fundamentals | 🔲 Planned |
+| Lab 27 | Security Fundamentals | 🔲 Planned |
+| Lab 28 | Network Automation & Programmability | 🔲 Planned |
 
 ---
 
@@ -90,15 +105,15 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 
 ## Certification Target
 
-**Cisco Certified Network Associate (CCNA) 200-301**
+**Cisco Certified Network Associate (CCNA) 200-301)**
 
 Exam domains covered by this lab series:
 
 - **1.0 Network Fundamentals** — OSI model, Ethernet, switching, subnetting
 - **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel, SVIs, DTP, VTP
 - **3.0 IP Connectivity** — Routing tables, static routes, floating static routes, EIGRP, OSPFv2, FHRP
-- **4.0 IP Services** — DHCP, NAT, NTP *(coming)*
-- **5.0 Security Fundamentals** — ACLs, port security *(coming)*
+- **4.0 IP Services** — DHCP, NAT *(coming)*
+- **5.0 Security Fundamentals** — Standard ACLs, Extended ACLs
 - **6.0 Automation & Programmability** — *(coming)*
 
 ---
@@ -124,7 +139,12 @@ CCNA-LABS/
 ├── LAB 15- OSPF PT2/
 ├── LAB 16- OSPF PT3/
 ├── LAB 17- Integrated Network Design/
-├── LAB 18- HSRP Configuration/
+├── LAB 18- HSRP Config/
+├── LAB 19- IPv6 Config PT1/
+├── LAB 20- IPv6 Config PT2/
+├── LAB 21- IPv6 Config PT3/
+├── LAB 22- Standard ACLs/
+├── LAB 23- Extended ACLs/
 └── README.md  ← you are here
 ```
 
