@@ -80,15 +80,24 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 | Lab 22 | Standard ACLs (Numbered & Named) | Standard ACLs, Wildcard Masks, OSPF | ✅ Complete |
 | Lab 23 | Extended ACLs | TCP/UDP/IP matching, Port numbers, ACL editing | ✅ Complete |
 
+### ✅ Network Management & IP Services
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 24 | CDP & LLDP | Cisco Discovery Protocol, Link Layer Discovery Protocol | ✅ Complete |
+| Lab 25 | NTP | Network Time Protocol, Stratum, Authentication | ✅ Complete |
+| Lab 26 | DNS | Domain Name System, Host Table, ip helper-address | ✅ Complete |
+| Lab 27 | DHCP | DHCP Server, Relay Agent, DHCP Client | ✅ Complete |
+| Lab 28 | SNMP | Community Strings, MIB Browser, Get/Set Operations | ✅ Complete |
+
 ### 🔲 Coming Next
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 24 | DHCP | 🔲 Planned |
-| Lab 25 | NAT / PAT | 🔲 Planned |
-| Lab 26 | Wireless Fundamentals | 🔲 Planned |
-| Lab 27 | Security Fundamentals | 🔲 Planned |
-| Lab 28 | Network Automation & Programmability | 🔲 Planned |
+| Lab 29 | NAT / PAT | 🔲 Planned |
+| Lab 30 | Wireless Fundamentals | 🔲 Planned |
+| Lab 31 | Security Fundamentals | 🔲 Planned |
+| Lab 32 | Network Automation & Programmability | 🔲 Planned |
 
 ---
 
@@ -112,7 +121,7 @@ Exam domains covered by this lab series:
 - **1.0 Network Fundamentals** — OSI model, Ethernet, switching, subnetting
 - **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel, SVIs, DTP, VTP
 - **3.0 IP Connectivity** — Routing tables, static routes, floating static routes, EIGRP, OSPFv2, FHRP
-- **4.0 IP Services** — DHCP, NAT *(coming)*
+- **4.0 IP Services** — DHCP, DNS, NTP, SNMP, CDP/LLDP
 - **5.0 Security Fundamentals** — Standard ACLs, Extended ACLs
 - **6.0 Automation & Programmability** — *(coming)*
 
@@ -145,6 +154,11 @@ CCNA-LABS/
 ├── LAB 21- IPv6 Config PT3/
 ├── LAB 22- Standard ACLs/
 ├── LAB 23- Extended ACLs/
+├── LAB 24- CDP & LLDP/
+├── LAB 25- NTP/
+├── LAB 26- DNS/
+├── LAB 27- DHCP/
+├── LAB 28- SNMP/
 └── README.md  ← you are here
 ```
 
