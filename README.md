@@ -86,18 +86,30 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 |-----|-------|-------------------|--------|
 | Lab 24 | CDP & LLDP | Cisco Discovery Protocol, Link Layer Discovery Protocol | ✅ Complete |
 | Lab 25 | NTP | Network Time Protocol, Stratum, Authentication | ✅ Complete |
-| Lab 26 | DNS | Domain Name System, Host Table, ip helper-address | ✅ Complete |
+| Lab 26 | DNS | Domain Name System, Host Table, ip name-server | ✅ Complete |
 | Lab 27 | DHCP | DHCP Server, Relay Agent, DHCP Client | ✅ Complete |
 | Lab 28 | SNMP | Community Strings, MIB Browser, Get/Set Operations | ✅ Complete |
+| Lab 29 | Syslog | Logging Destinations, Severity Levels, External Server | ✅ Complete |
+| Lab 30 | SSH | RSA Keys, VTY Security, ACL-based Access Restriction | ✅ Complete |
+| Lab 31 | FTP & TFTP | IOS Upgrade, File Transfer, Flash Management | ✅ Complete |
+| Lab 32 | Static NAT | Inside/Outside Interfaces, One-to-One Mappings | ✅ Complete |
+| Lab 33 | Dynamic NAT & PAT | NAT Pool, PAT Overload, Pool Exhaustion | ✅ Complete |
+
+### ✅ Security — Layer 2 & QoS
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 34 | Voice VLANs | switchport voice vlan, ROAS, PoE, 802.1Q Tagging | ✅ Complete |
+| Lab 35 | QoS | Class Maps, Policy Maps, DSCP Marking, Service Policy | ✅ Complete |
 
 ### 🔲 Coming Next
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| Lab 29 | NAT / PAT | 🔲 Planned |
-| Lab 30 | Wireless Fundamentals | 🔲 Planned |
-| Lab 31 | Security Fundamentals | 🔲 Planned |
-| Lab 32 | Network Automation & Programmability | 🔲 Planned |
+| Lab 36 | Port Security | 🔲 Planned |
+| Lab 37 | DHCP Snooping | 🔲 Planned |
+| Lab 38 | Wireless Configuration | 🔲 Planned |
+| Lab 39 | Network Automation | 🔲 Planned |
 
 ---
 
@@ -121,8 +133,8 @@ Exam domains covered by this lab series:
 - **1.0 Network Fundamentals** — OSI model, Ethernet, switching, subnetting
 - **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel, SVIs, DTP, VTP
 - **3.0 IP Connectivity** — Routing tables, static routes, floating static routes, EIGRP, OSPFv2, FHRP
-- **4.0 IP Services** — DHCP, DNS, NTP, SNMP, CDP/LLDP
-- **5.0 Security Fundamentals** — Standard ACLs, Extended ACLs
+- **4.0 IP Services** — DHCP, DNS, NTP, SNMP, CDP/LLDP, NAT, SSH, FTP/TFTP, QoS, Voice VLANs
+- **5.0 Security Fundamentals** — Standard ACLs, Extended ACLs, Port Security, DHCP Snooping *(coming)*
 - **6.0 Automation & Programmability** — *(coming)*
 
 ---
@@ -159,6 +171,13 @@ CCNA-LABS/
 ├── LAB 26- DNS/
 ├── LAB 27- DHCP/
 ├── LAB 28- SNMP/
+├── LAB 29- Syslog/
+├── LAB 30- SSH/
+├── LAB 31- FTP & TFTP/
+├── LAB 32- NAT PT. 1/
+├── LAB 33- NAT PT.2/
+├── LAB 34- Voice VLANS/
+├── LAB 35- QoS/
 └── README.md  ← you are here
 ```
 
