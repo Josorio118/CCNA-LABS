@@ -102,7 +102,6 @@ When SW1's SVI sent traffic through G0/1, SW2 saw a 5th source MAC exceeding the
 - `int v;lan 1` typo (semicolon) rejected; corrected to `int vlan 1`
 - `sh mac-address table` rejected in Packet Tracer; correct command is `show mac-address` (no "table")
 - SW2's G0/1 was initially configured as trunk; changed to access since port security requires static access or trunk mode and the lab uses access
-- Cannot reassign a cable by clicking the interface dropdown on a PC in Packet Tracer; must delete the connection and redraw with the cable tool
 
 ---
 
