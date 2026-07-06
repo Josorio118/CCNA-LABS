@@ -87,8 +87,6 @@ show ip arp inspection vlan 1
 ```
 
 ## Troubleshooting Encountered
-
-- Attempted `ip add dhcp` and `ip address dhcp` on SW1 interface Gi0/1, expecting it would request an IP for the switch. Both were rejected with `% Invalid input detected`. Determined that switchports are Layer 2 by default and cannot take a direct IP address, and that this command was not required anywhere in the lab objectives.
 - Typo on SW1: entered `no dhcp ip dhcp snooping information option`, which was rejected. Corrected to `no ip dhcp snooping information option`.
 - Typo on SW2: entered `ip arp inspection vlaidate ip src-mac dst-mac`, which was rejected. Corrected to `ip arp inspection validate ip src-mac dst-mac`.
 
@@ -115,4 +113,4 @@ show ip arp inspection vlan 1
 ## Files
 
 - `README.md` – this file
-- `Day 51 Lab - Dynamic ARP Inspection.pkt` – Packet Tracer topology and configuration file
+- `Lab 38- Dynamic ARP Inspection.pkt` – Packet Tracer topology and configuration file
