@@ -102,14 +102,26 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 | Lab 34 | Voice VLANs | switchport voice vlan, ROAS, PoE, 802.1Q Tagging | ✅ Complete |
 | Lab 35 | QoS | Class Maps, Policy Maps, DSCP Marking, Service Policy | ✅ Complete |
 
-### 🔲 Coming Next
+### ✅ Security — Layer 2 Hardening
 
-| Lab | Topic | Status |
-|-----|-------|--------|
-| Lab 36 | Port Security | 🔲 Planned |
-| Lab 37 | DHCP Snooping | 🔲 Planned |
-| Lab 38 | Wireless Configuration | 🔲 Planned |
-| Lab 39 | Network Automation | 🔲 Planned |
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 36 | Port Security | Sticky MAC, Violation Modes | ✅ Complete |
+| Lab 37 | DHCP Snooping | Trusted/Untrusted Ports, Binding Table | ✅ Complete |
+| Lab 38 | Dynamic ARP Inspection | DAI, DHCP Snooping Integration | ✅ Complete |
+
+### ✅ Redundancy & Tunneling
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 39 | STP & HSRP Synchronization | Root/Active Alignment, Priority Tuning | ✅ Complete |
+| Lab 40 | GRE Tunnels | GRE over IPv4, OSPF over Tunnel | ✅ Complete |
+
+### ✅ Wireless
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 41 | Wireless LAN | SSIDs, WLAN Security, AP Modes | ✅ Complete |
 
 ---
 
@@ -134,7 +146,7 @@ Exam domains covered by this lab series:
 - **2.0 Network Access** — VLANs, trunking, STP, RSTP, EtherChannel, SVIs, DTP, VTP
 - **3.0 IP Connectivity** — Routing tables, static routes, floating static routes, EIGRP, OSPFv2, FHRP
 - **4.0 IP Services** — DHCP, DNS, NTP, SNMP, CDP/LLDP, NAT, SSH, FTP/TFTP, QoS, Voice VLANs
-- **5.0 Security Fundamentals** — Standard ACLs, Extended ACLs, Port Security, DHCP Snooping *(coming)*
+- **5.0 Security Fundamentals** — Standard ACLs, Extended ACLs, Port Security, DHCP Snooping, Dynamic ARP Inspection
 - **6.0 Automation & Programmability** — *(coming)*
 
 ---
@@ -178,9 +190,15 @@ CCNA-LABS/
 ├── LAB 33- NAT PT.2/
 ├── LAB 34- Voice VLANS/
 ├── LAB 35- QoS/
+├── LAB 36- Port Security/
+├── LAB 37- DHCP Snooping/
+├── LAB 38- Dynamic ARP Inspection/
+├── LAB 39- STP & HSRP Synchronization/
+├── LAB 40- GRE Tunnels/
+├── LAB 41- Wireless LAN/
 └── README.md  ← you are here
 ```
 
 ---
 
-*Updated as new labs are completed. Each lab README contains full configuration details, CLI output, and exam alignment.*
+*Updated as new labs are completed. Each lab README contains full configuration details, CLI output, and exam alignment.*README contains full configuration details, CLI output, and exam alignment.*
