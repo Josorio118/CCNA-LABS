@@ -53,12 +53,6 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 | Lab 15 | OSPFv2 Single Area (Part 2) | ip ospf interface command, Reference Bandwidth, Cost | ✅ Complete |
 | Lab 16 | OSPFv2 Part 3 — DR/BDR, Network Types & Troubleshooting | Broadcast/P2P network types, Neighbor requirements, LSA types | ✅ Complete |
 
-### ✅ Capstone
-
-| Lab | Topic | Protocol / Method | Status |
-|-----|-------|-------------------|--------|
-| Lab 17 | Integrated Network Design | VLANs, EtherChannel, VTP, STP, OSPFv2, Floating Static, Serial WAN | ✅ Complete |
-
 ### ✅ IP Services & First Hop Redundancy
 
 | Lab | Topic | Protocol / Method | Status |
@@ -123,6 +117,13 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 |-----|-------|-------------------|--------|
 | Lab 41 | Wireless LAN | SSIDs, WLAN Security, AP Modes | ✅ Complete |
 
+### ✅ Capstone
+
+| Lab | Topic | Protocol / Method | Status |
+|-----|-------|-------------------|--------|
+| Lab 17 | Integrated Network Design | VLANs, EtherChannel, VTP, STP, OSPFv2, Floating Static, Serial WAN | ✅ Complete |
+| Lab 42 | CCNA Mega Lab — 12+ Device Enterprise Topology, Full CCNA Syllabus | EtherChannel, VTP, Trunking, Rapid PVST+, HSRP, OSPF, DHCP/DNS/NTP/SNMP/Syslog, SSH, NAT/PAT, Port Security, DHCP Snooping, DAI, Extended ACLs, IPv6, Wireless LAN | ✅ Complete |
+
 ---
 
 ## Tools & Resources
@@ -138,7 +139,7 @@ I'm working through Jeremy's IT Lab's free CCNA 200-301 course and building hand
 
 ## Certification Target
 
-**Cisco Certified Network Associate (CCNA) 200-301)**
+**Cisco Certified Network Associate (CCNA) 200-301**
 
 Exam domains covered by this lab series:
 
@@ -196,9 +197,10 @@ CCNA-LABS/
 ├── LAB 39- STP & HSRP Synchronization/
 ├── LAB 40- GRE Tunnels/
 ├── LAB 41- Wireless LAN/
+├── LAB 42- CCNA Mega Lab/
 └── README.md  ← you are here
 ```
 
 ---
 
-*Updated as new labs are completed. Each lab README contains full configuration details, CLI output, and exam alignment.*README contains full configuration details, CLI output, and exam alignment.*
+*Updated as new labs are completed. Each lab README contains full configuration details, CLI output, and exam alignment.*t.*
