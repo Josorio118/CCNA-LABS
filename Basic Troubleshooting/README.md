@@ -440,7 +440,6 @@ ip route 192.168.2.0 255.255.255.0 10.1.1.2
 - VLAN and trunk troubleshooting (`show interface trunk`, allowed-VLAN lists, trunk/access mode mismatches)
 - Recognizing Spanning Tree Protocol convergence delay as distinct from a persistent misconfiguration
 - Static route troubleshooting, including next-hop validation and subnet mask scope errors
-- Using `traceroute` to localize a Layer 3 fault to a specific hop
 - Reading `show run` output critically rather than trusting a surface-level `show ip interface brief` check
 - Correct `ip route` syntax, including selecting a valid next-hop host address rather than a network address
 
