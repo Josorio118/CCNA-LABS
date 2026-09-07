@@ -451,6 +451,137 @@ ip route 192.168.2.0 255.255.255.0 10.1.1.2
 | 2.0 | Network Access — VLANs, trunking, Spanning Tree Protocol |
 | 3.0 | IP Connectivity — static routing configuration and troubleshooting |
 
+# Troubleshooting Fundamentals — VLAN Trunking & Router-on-a-Stick
+
+This section covers three independent troubleshooting labs built around a shared router-on-a-stick topology (multiple routers, VLAN-segmented hosts, 802.1Q trunking). Each lab presented a "hosts can't communicate" objective with no hints — root cause had to be isolated using a layer-by-layer (L1→L2→L3) approach.
+
+---
+
+## Lab: VLAN Trunking & Default Gateway Misconfiguration
+
+### Objective
+Host B was unable to communicate with other hosts on the network. Lab complete when full reachability is restored.
+
+### Topology
+- RTR1 — RTR2 — RTR3, connected via point-to-point /30 links
+- RTR1 running router-on-a-stick for VLAN 30 (Host A) and VLAN 40 (Host B) via SW1
+- RTR3 running router-on-a-stick for VLAN 10/VLAN 20 side (Host C/Host D) via SW2
+
+### Issues Found
+
+**1. SW2 Fa0/1 (uplink to RTR1) left in default access mode instead of trunk**
+- Host D (VLAN 40) could not reach its gateway
+- The router-on-a-stick design required this uplink to carry both VLAN 30 and VLAN 40 tagged traffic; in access mode, VLAN 40 traffic never reached the router at all
+- Fix:
+```
+interface FastEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+```
+
+**2. Host B's default gateway configured as 0.0.0.0**
+- Host B could ping its own gateway and same-subnet hosts, but nothing off-subnet — misleading at first, since the local ping checks looked fine
+- Root cause: default gateway field was never set (left at 0.0.0.0), so the host had no path for any off-subnet traffic
+- Fix: set Default Gateway to 192.168.20.1 in Host B's IP configuration
+
+### Key Observations
+- A host being able to ping its own gateway does not confirm the gateway is *configured on the host* — that ping only proves ARP/L2 reachability to a device on the same subnet. The gateway field itself has to be checked directly.
+- Access vs. trunk mode on an uplink is a common silent failure — the port shows up/up with no errors, but traffic for VLANs not tagged/trunked simply never arrives.
+
+### Skills Demonstrated
+- Layer-by-layer (L1→L2→L3) systematic troubleshooting
+- Trunk port configuration and verification (`show interfaces trunk`)
+- Host IP configuration auditing
+- Distinguishing "local reachability" from "default gateway configured" as separate checks
+
+### CCNA Exam Alignment
+- Network Access: trunk ports, 802.1Q, VLAN configuration
+- IP Connectivity: default gateway requirements for off-subnet communication
+---
+
+## Lab: Router Subinterface VLAN Tag Mismatch
+
+### Objective
+Host D was unable to communicate with Host B. Lab complete when Host D can communicate with Host B.
+
+### Topology
+Same router-on-a-stick design as above (RTR1 serving VLAN 10/VLAN 20 via SW1).
+
+### Issue Found
+
+**RTR1 Gi0/0/1.20 configured with `encapsulation dot1Q 21` instead of `dot1Q 20`**
+- The subinterface's IP address (192.168.20.1/24) was correct for VLAN 20, but the 802.1Q tag it expected (21) didn't match the VLAN tag SW1 actually sends (20)
+- Result: traffic tagged VLAN 20 arriving on the trunk was not recognized as belonging to that subinterface and was dropped — Host B could reach its own gateway and same-VLAN hosts, but nothing routed
+- Fix:
+```
+interface GigabitEthernet0/0/1.20
+ encapsulation dot1Q 20
+```
+
+### Key Observations
+- A subinterface's IP address being correct does not guarantee its encapsulation tag matches — these are two independent values that must both be checked against the switch's actual VLAN assignment.
+- This class of bug produces the exact same symptom pattern as a missing default gateway (local traffic works, all routed traffic fails) — the two have to be distinguished by checking the router side, not just the host side.
+
+### Skills Demonstrated
+- Router-on-a-stick subinterface verification
+- Isolating router-side vs. host-side causes of identical symptoms
+- Reading `show running-config` for subinterface encapsulation/IP pairing
+
+### CCNA Exam Alignment
+- Network Access: 802.1Q trunking, router-on-a-stick
+- IP Connectivity: subinterface configuration and troubleshooting
+
+---
+
+## Lab: Multi-Device Host, Trunk, and VLAN Database Misconfiguration
+
+### Objective
+Verify that all hosts on the network have full reachability after a technician completed host installation.
+
+### Topology
+Four-router hub topology (RTR2 as central hub to RTR1 and RTR3), each edge router running router-on-a-stick to a switch and two hosts.
+
+### Issues Found (three, layered)
+
+**1. Host C configured with the wrong IP address**
+- Host C was addressed as 192.168.30.3 instead of the expected 192.168.30.2
+- Fix: corrected Host C's static IP to 192.168.30.2
+
+**2. SW4 Fa0/1 (uplink to SW2) left in default access mode instead of trunk**
+- Even after correcting Host C's IP, it still could not reach its gateway
+- Confirmed via `show interfaces trunk` that the SW2 side of the link was already trunking correctly, but SW4's side had no `switchport mode trunk` statement at all
+- Fix:
+```
+interface FastEthernet0/1
+ switchport mode trunk
+```
+
+**3. VLAN 30 missing entirely from SW2's local VLAN database**
+- Even with both ends of the SW2–SW4 trunk correctly configured, Host C still could not reach its gateway
+- `show vlan brief` on SW2 showed VLAN 40 present but VLAN 30 absent — a trunk cannot forward frames for a VLAN that isn't locally created on the switch, regardless of trunk/allowed-VLAN configuration
+- Fix:
+```
+vlan 30
+ name VLAN0030
+```
+
+### Key Observations
+- Multiple independent misconfigurations can stack on a single path — fixing the first (or even second) issue found is not proof the path is clear. Full reachability has to be re-verified after each fix.
+- CDP neighbor output (`show cdp neighbors`) confirmed physical topology and ruled out cabling as a factor early, which narrowed the search to configuration only.
+- A trunk port showing "trunking" status with the correct allowed-VLAN list does not guarantee traffic for that VLAN will actually forward — the VLAN must also exist in the local VLAN database on both switches.
+- `traceroute`/`tracert` failing at hop 1 confirmed the break was on the local segment (host-to-gateway), which ruled out downstream routers and focused troubleshooting on the switch layer.
+
+### Skills Demonstrated
+- Multi-fault isolation across host, switch, and trunk layers
+- CDP-based physical topology verification
+- VLAN database auditing (`show vlan brief`) as distinct from trunk/port configuration
+- Iterative retesting after each individual fix
+
+### CCNA Exam Alignment
+- Network Access: VLAN database management, trunk configuration, CDP
+- IP Connectivity: host addressing, gateway reachability
+- Troubleshooting methodology: layered fault isolation
+
 ## Files
 
-- Individual Packet Tracer lab files (`Basic_Troubleshooting_1.pka` through `Basic_Troubleshooting_9.pka`)
+- Individual Packet Tracer lab files (`Basic_Troubleshooting_1.pka` through `Basic_Troubleshooting_12.pka`)
